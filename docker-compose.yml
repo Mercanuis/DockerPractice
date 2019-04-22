@@ -1,0 +1,17 @@
+version: '3'
+#Define 2 services: web and redis
+services:
+  web:
+    #the image is located in the current directory (which should be /code)
+    #exposed port is 5000, and forwards to the host machine at 5000
+    build: .
+    ports:
+      - "5000:5000"
+    #mount the project directory (current directory) on the host to /code
+    #this allows for 'on the fly' changes to be made to the code and reflect in the container
+    volumes:
+      - .:/code
+  redis:
+    #pulls a public redis image for use
+    #docker hub has a list of the various image tags for use
+    image: "redis:alpine"
